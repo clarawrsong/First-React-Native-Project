@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 
 import Title from './components/Title';
 import Input from './components/Input';
 import List from './components/List';
 import Footer from './components/Footer';
+
+const STORAGE_KEY = 'todoList';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,13 +19,11 @@ export default class App extends Component {
     super();
     this.state = {
       item: null,
-      todos: [{text:'Walk the dog', completed:false},
-        {text:'Mow lawn', completed:true}]
+      todos: []
     }
   }
 
   onChangeText = (newText) => {
-    // console.log(newText)
     this.setState({
       item: {
         text: newText,
@@ -35,8 +35,11 @@ export default class App extends Component {
   addItem = () => {
     const {todos} = this.state;
     const newItem = this.state.item;
+    const newTodos = [newItem, ...todos];
     if (!newItem) return
-    this.setState({todos: [newItem, ...todos]});
+
+    this.setState({todos: newTodos});
+    this.save(newTodos);
   }
 
   toggleCheck = (x) => {
@@ -56,20 +59,47 @@ export default class App extends Component {
       }
     })
     this.setState({todos: newTodos});
+    this.save(newTodos);
   }
 
   removeItem = (index) => {
     const {todos} = this.state;
-    this.setState({
-      todos: todos.filter((item, i) => i !== index),
-    })
+    const newTodos = todos.filter((item, i) => i !== index);
+
+    this.setState({todos: newTodos});
+    this.save(newTodos);
   }
 
   removeCompleted = () => {
     const {todos} = this.state;
-    this.setState({
-      todos: todos.filter((item) => item.completed === false),
-    })
+    const newTodos = todos.filter((item) => item.completed === false);
+
+    this.setState({todos: newTodos});
+    this.save(newTodos);
+  }
+
+  load = async () => {
+    try {
+      //problem with getItem
+       const list = await AsyncStorage.getItem(STORAGE_KEY);  
+       if (list !== null) {
+         this.setState({todos: JSON.parse(list)})
+       }
+    } catch (e) {
+      console.log('failed to load')
+    }
+  }
+
+  save = async (newList) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.toString(newList));
+    } catch (e) {
+      console.log('failed to save')
+    }
+  }
+
+  componentWillMount() {
+    this.load()
   }
 
   render() {
