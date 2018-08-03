@@ -16,22 +16,36 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      todos: []
+      item: null,
+      todos: [{text:'Walk the dog', completed:false},
+        {text:'Mow lawn', completed:true}]
     }
   }
+
+  onChangeText = (newText) => {
+    // console.log(newText)
+    this.setState({
+      item: {
+        text: newText,
+        completed: false
+      }
+    })
+  }
   
-  addItem = (text) => {
+  addItem = () => {
     const {todos} = this.state;
-    this.setState({todos: [text, ...todos]});
-    console.log('submitted')
+    const newItem = this.state.item;
+    if (!newItem) return
+    this.setState({todos: [newItem, ...todos]});
   }
 
   render() {
+    // console.log(this.state.todos)
     return (
       <View style={styles.container}>
         <Title />
-        <Input addItem={this.addItem}/>
-        <List />
+        <Input changeText={this.onChangeText} addItem={this.addItem}/>
+        <List list={this.state.todos}/>
         <Footer />
       </View>
     );

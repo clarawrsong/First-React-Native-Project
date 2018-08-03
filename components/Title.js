@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   header: {
     alignSelf: 'stretch',
     padding: 15,
-    backgroundColor: '#87CEEB'
+    backgroundColor: '#ff328b'
   },
   title: {
     textAlign: 'center',

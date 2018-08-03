@@ -3,23 +3,18 @@ import { StyleSheet, Text, View } from 'react-native';
 
 
 const styles = StyleSheet.create({
-  header: {
-    top: 20,
-    alignSelf: 'stretch',
-    padding: 10,
-    backgroundColor: '#87CEEB'
+  box: {
+    alignSelf: 'flex-end',
   },
-  title: {
-      textAlign: 'center',
-      color: 'white',
-      fontSize: 20,
+  check: {
+
   }
 });
 
 export default class Checkbox extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.box}>
         <Text>Checkbox</Text>
       </View>
     );
