@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems:'center',
     padding: 15,
-    backgroundColor: '#878787'
+    backgroundColor: '#4c4c4c'
   },
   text: {
     textAlign: 'center',
@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
 export default class Footer extends Component {
   render() {
     return (
-      <TouchableOpacity style={styles.footer} > 
+      <TouchableOpacity 
+        style={styles.footer} onPress={this.props.removeCompleted}
+      > 
         <Text style={styles.text}>Remove completed items</Text>
       </TouchableOpacity>
     );

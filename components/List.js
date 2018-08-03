@@ -30,7 +30,13 @@ export default class List extends Component {
     return (
       <View style={itemStyle} >
         <Text style={styles.text}> {item.text} </Text>
-        <Checkbox item={item} checked={item.completed} toggleCheck={this.props.toggleCheck}/>
+        <Checkbox 
+          item={item}
+          index={i}
+          checked={item.completed} 
+          toggleCheck={this.props.toggleCheck}
+          removeItem={this.props.removeItem}
+        />
       </View>
     )
   }

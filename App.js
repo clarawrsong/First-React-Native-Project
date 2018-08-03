@@ -39,15 +39,15 @@ export default class App extends Component {
     this.setState({todos: [newItem, ...todos]});
   }
 
-  toggleCheck = (i) => {
+  toggleCheck = (x) => {
     const {todos} = this.state;
     const newTodos = [];
-    const newCompleted = i.completed ? false: true;
+    const newCompleted = x.completed ? false: true;
 
     this.state.todos.forEach((item) => {
-      if (item.text === i.text) {
+      if (item.text === x.text) {
         var newItem = {
-          text: i.text,
+          text: x.text,
           completed: newCompleted
         }
         newTodos.push(newItem)
@@ -58,14 +58,31 @@ export default class App extends Component {
     this.setState({todos: newTodos});
   }
 
+  removeItem = (index) => {
+    const {todos} = this.state;
+    this.setState({
+      todos: todos.filter((item, i) => i !== index),
+    })
+  }
+
+  removeCompleted = () => {
+    const {todos} = this.state;
+    this.setState({
+      todos: todos.filter((item) => item.completed === false),
+    })
+  }
+
   render() {
-    // console.log(this.state.todos)
     return (
       <View style={styles.container}>
         <Title />
         <Input changeText={this.onChangeText} addItem={this.addItem}/>
-        <List list={this.state.todos} toggleCheck={this.toggleCheck}/>
-        <Footer />
+        <List 
+          list={this.state.todos} 
+          toggleCheck={this.toggleCheck}
+          removeItem={this.removeItem}
+        />
+        <Footer removeCompleted={this.removeCompleted}/>
       </View>
     );
   }
