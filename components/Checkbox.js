@@ -1,22 +1,37 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 
 const styles = StyleSheet.create({
   box: {
-    alignSelf: 'flex-end',
+    alignSelf:'center',
+    justifyContent:'center',
+    height: 26,
+    width: 26,
+    borderWidth:1,
+    borderColor: '#4c4c4c',
+    backgroundColor: 'white',
   },
   check: {
-
+    height: 18,
+    width: 18,
+    backgroundColor: '#4c4c4c',
+    alignSelf:'center'
   }
 });
 
 export default class Checkbox extends Component {
+  
   render() {
+    const {item} = this.props;
+    var checkStyle = this.props.checked ? styles.check : null;
     return (
-      <View style={styles.box}>
-        <Text>Checkbox</Text>
-      </View>
+      <TouchableOpacity 
+        style={styles.box}
+        onPress={() => {this.props.toggleCheck(item)}}
+      >
+        <View style={checkStyle}/>
+      </TouchableOpacity>
     );
   }
 }

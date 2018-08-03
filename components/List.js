@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   }, 
   item: {
     margin: 4,
-    padding: 10,
+    padding: 8,
     backgroundColor: '#ffe0ec',
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7f7f7'
   },
   text: {
-    fontSize: 18
+    fontSize: 18,
+    alignSelf:'center'
   }
 });
 
@@ -29,7 +30,7 @@ export default class List extends Component {
     return (
       <View style={itemStyle} >
         <Text style={styles.text}> {item.text} </Text>
-        <Checkbox />
+        <Checkbox item={item} checked={item.completed} toggleCheck={this.props.toggleCheck}/>
       </View>
     )
   }

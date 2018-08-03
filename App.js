@@ -39,13 +39,32 @@ export default class App extends Component {
     this.setState({todos: [newItem, ...todos]});
   }
 
+  toggleCheck = (i) => {
+    const {todos} = this.state;
+    const newTodos = [];
+    const newCompleted = i.completed ? false: true;
+
+    this.state.todos.forEach((item) => {
+      if (item.text === i.text) {
+        var newItem = {
+          text: i.text,
+          completed: newCompleted
+        }
+        newTodos.push(newItem)
+      } else {
+        newTodos.push(item)
+      }
+    })
+    this.setState({todos: newTodos});
+  }
+
   render() {
     // console.log(this.state.todos)
     return (
       <View style={styles.container}>
         <Title />
         <Input changeText={this.onChangeText} addItem={this.addItem}/>
-        <List list={this.state.todos}/>
+        <List list={this.state.todos} toggleCheck={this.toggleCheck}/>
         <Footer />
       </View>
     );
