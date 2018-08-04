@@ -5,7 +5,8 @@ import Checkbox from './Checkbox';
 
 const styles = StyleSheet.create({
   list: {
-    padding: 20
+    padding: 20,
+    paddingTop: 10
   }, 
   item: {
     margin: 4,
