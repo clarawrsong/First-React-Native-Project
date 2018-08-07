@@ -1,6 +1,14 @@
 ## My first React Native project: A Simple Todo List
 referenced http://www.reactnativeexpress.com/todo_list
-<br><br>
+<br>
+Features include 
+- input box to enter todos followed by a list of todos already entered or stored in AsyncStorage
+- checkboxes to indicate completed todos (when checked, the item changes color to further indicate completion)
+- 'X' option to remove todo item next to checkboxes
+- button to clear all completed items
+- home screen before entering todo list (for more tools to be added in future!)
+
+<br>
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
