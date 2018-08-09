@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Title extends Component {
+export default class Input extends Component {
   render() {
     return (
       <View style={styles.input}>
